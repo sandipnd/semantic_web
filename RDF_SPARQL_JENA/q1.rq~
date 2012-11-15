@@ -1,0 +1,53 @@
+1) Find all assistant professors
+(2) Find all lecturers who teache on Monday?
+(3) Find assistant professors who teach Graduate?
+(4) Find who teach graduate and on which day?
+(5) Find courses on Monday
+
+
+--------------------------------------------------------------------------
+
+Q1.
+SELECT ?name 
+WHERE { ?x  <http://somewhere/lecturer#position> "Assistant Professor" .
+	?x  <http://somewhere/lecturer#name>    ?name .
+      }
+
+
+
+Q2. 
+SELECT ?name
+WHERE { ?x  <http://somewhere/lecturer#name> ?name .
+        ?x  <http://somewhere/lecturer#teaches> ?tech .
+        ?tech <http://course/else#Time> "Monday" .
+      }
+
+Q3.
+SELECT ?name
+WHERE { ?x  <http://somewhere/lecturer#position> "Assistant Professor" .
+        ?x  <http://somewhere/lecturer#name> ?name .
+        ?x  <http://somewhere/lecturer#teaches> ?tech .
+        ?tech <http://course/else#studentType> "Graduate" .
+        
+      }
+
+Q4.
+SELECT ?name ?day
+WHERE { 
+        ?x  <http://somewhere/lecturer#name> ?name .
+        ?x  <http://somewhere/lecturer#teaches> ?tech .
+        ?tech <http://course/else#studentType> "Graduate" .
+        ?tech <http://course/else#Time> ?day .
+        
+      }
+
+
+Q5. 
+
+SELECT ?name
+WHERE { ?x  <http://course/else#Time> "Monday" .
+        ?x  <http://course/else#courseName>  ?name .
+        
+      }
+
+
